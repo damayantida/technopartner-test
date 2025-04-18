@@ -27,7 +27,7 @@
 ## 🔧 Installation
 
 ```bash
-git clone https://github.com/your-username/techno-wallet-app.git
-cd techno-wallet-app
+git clone https://github.com/damayantida/technopartner-test.git
+cd technopartner-test
 npm install
 npx expo start
