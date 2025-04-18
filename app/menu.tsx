@@ -92,9 +92,7 @@ export default function MenuScreen() {
 		<SafeAreaView className='flex-1 bg-[#F5F5F5]'>
 			{/* Compact Header */}
 			<View className='bg-white px-4 py-4'>
-				<Text className='text-lg font-bold text-black text-center font-ubuntu-bold'>
-					MENU
-				</Text>
+				<Text className='text-lg font-bold text-black text-center'>MENU</Text>
 			</View>
 
 			{/* Category Tabs */}

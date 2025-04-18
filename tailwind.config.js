@@ -8,10 +8,6 @@ module.exports = {
 			colors: {
 				primary: '#FEFFFF',
 			},
-			fontFamily: {
-				ubuntu: ['Ubuntu_400Regular'],
-				'ubuntu-bold': ['Ubuntu_700Bold'],
-			},
 		},
 	},
 	plugins: [],
