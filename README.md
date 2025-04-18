@@ -15,16 +15,6 @@
 
 ---
 
-## 📷 Preview
-
-| Login | Home | QR Code |
-|------|------|---------|
-| ![Login Screen](./assets/screens/login.png) | ![Home](./assets/screens/home.png) | ![QR](./assets/screens/qr.png) |
-
-> _Design inspired by TechnoPartner's provided Figma._
-
----
-
 ## ⚙️ Tech Stack
 
 - **Expo** (React Native framework)
