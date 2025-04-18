@@ -1,39 +1,34 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import './global.css';
+
+import {
+	useFonts,
+	Ubuntu_400Regular,
+	Ubuntu_700Bold,
+} from '@expo-google-fonts/ubuntu';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { useCallback } from 'react';
+import { View, Text } from 'react-native';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+	const [fontsLoaded] = useFonts({
+		Ubuntu_400Regular,
+		Ubuntu_700Bold,
+	});
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+	const onLayoutRootView = useCallback(async () => {
+		if (fontsLoaded) {
+			await SplashScreen.hideAsync();
+		}
+	}, [fontsLoaded]);
 
-  if (!loaded) {
-    return null;
-  }
+	if (!fontsLoaded) return null;
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+	return (
+		<View onLayout={onLayoutRootView} className='flex-1 font-ubuntu'>
+			<Stack screenOptions={{ headerShown: false }} />
+		</View>
+	);
 }
