@@ -54,8 +54,6 @@ cd cors-proxy
 node index.js
 ```
 
-Your CORS proxy will now be running at: `http://localhost:3001`
-
 4. **Run the Frontend (Expo app)**
 
 - In a new terminal window, go back to the main project folder and run:
