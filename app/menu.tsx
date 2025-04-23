@@ -20,47 +20,18 @@ export default function MenuScreen() {
 	const sectionRefs = useRef<any[]>([]);
 	const router = useRouter();
 
-	const login = async () => {
-		const formData = new FormData();
-		formData.append('grant_type', 'password');
-		formData.append('client_secret', '0a40f69db4e5fd2f4ac65a090f31b823');
-		formData.append('client_id', 'e78869f77986684a');
-		formData.append('username', 'support@technopartner.id');
-		formData.append('password', '1234567');
-
-		const res = await axios.post(
-			'https://soal.staging.id/oauth/token',
-			formData,
-			{
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			}
-		);
-
-		return res.data.access_token;
-	};
-
 	const fetchMenu = async () => {
 		try {
-			const token = await login();
-
-			const res = await axios.post(
-				'https://soal.staging.id/api/menu',
-				{ show_all: 1 },
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
+			const res = await axios.post('http://localhost:3001/api/menu', {
+				show_all: 1,
+			});
 
 			setData(res.data.result.categories);
 			if (res.data.result.categories.length > 0) {
 				setSelectedCategory(res.data.result.categories[0].category_name);
 			}
 		} catch (err) {
-			console.error('Menu API error:', err);
+			console.error('Menu fetch error:', err);
 			Alert.alert('Error', 'Failed to fetch menu');
 		}
 	};

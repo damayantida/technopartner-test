@@ -14,8 +14,6 @@ import {
 import axios from 'axios';
 import { useRouter } from 'expo-router';
 
-const { width } = Dimensions.get('window');
-
 export default function HomeScreen() {
 	const [data, setData] = useState<any>(null);
 	const [refreshing, setRefreshing] = useState(false);
@@ -26,39 +24,10 @@ export default function HomeScreen() {
 
 	const router = useRouter();
 
-	// === Auth function ===
-	const login = async () => {
-		const formData = new FormData();
-		formData.append('grant_type', 'password');
-		formData.append('client_secret', '0a40f69db4e5fd2f4ac65a090f31b823');
-		formData.append('client_id', 'e78869f77986684a');
-		formData.append('username', 'support@technopartner.id');
-		formData.append('password', '1234567');
-
-		const res = await axios.post(
-			'https://soal.staging.id/oauth/token',
-			formData,
-			{
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			}
-		);
-
-		return res.data.access_token;
-	};
-
 	// === Fetch home data with fresh token ===
 	const fetchData = async () => {
 		try {
-			const token = await login();
-
-			const res = await axios.get('https://soal.staging.id/api/home', {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-
+			const res = await axios.get('http://localhost:3001/api/home');
 			setData(res.data.result);
 		} catch (err) {
 			console.error('API error:', err);
